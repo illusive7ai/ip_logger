@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP Logger</title>
+    <script>
+        function sendLocation(position) {
+            var lat = position.coords.latitude;
+            var lon = position.coords.longitude;
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("GET", "http://192.168.1.5:5000/store?lat=" + lat + "&long=" + lon, true);
+            xhttp.send();
+        }
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(sendLocation);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        window.onload = getLocation;
+    </script>
+</head>
+<body>
+    <p>Getting your location and sending it to the server...</p>
+</body>
+</html>
